@@ -44,3 +44,16 @@ _Note:_ - optional: không bắt buộc
 - Union
 - Literal
 - Function
+
+# INTERFACE
+
+Chúng ta sử dụng Interface để định nghĩa một cấu trúc mà bất cứ Class nào khi sử dụng nó đều phải tuân thủ các biến và phương thức có trong interface
+Cú pháp:
+
+```php
+    export interface Product {
+        name: string;
+        brand: string;
+        color: string;
+    }
+```

@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./App.css";
 import { Permission } from "./utils/enums";
 import { Age } from "./utils/types";
+import Cart from "./components/Cart";
 
 const reviews: {
   name: string;
@@ -71,6 +72,7 @@ function App() {
   ) {
     return (
       <>
+        {/* <Cart></Cart> */}
         Review total <strong>{totalReview}</strong> | Last reviewed by{" "}
         <strong>{name}</strong> {premiumUser ? "⭐️" : ""}
       </>
