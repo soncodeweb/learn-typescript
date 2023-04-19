@@ -22,6 +22,8 @@ _Note:_ - optional: không bắt buộc
 
 - Object
   `const object: {} = {}`
+  `const object: {}[] = [{}]`: một mảng các obj
+
   ```php
     const user: { firstName: string; lastName: string; age: number; isStudent: boolean; } =
     {
@@ -31,8 +33,10 @@ _Note:_ - optional: không bắt buộc
         isStudent: ['Cao Thang', 'GTVT'],
     };
   ```
+
   `number[]`: mảng các số
   `string[]`: mảng các chuỗi
+
 - Array
 - Tuple
 - Enum

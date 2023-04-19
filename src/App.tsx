@@ -2,7 +2,13 @@
 import { useState } from "react";
 import "./App.css";
 
-const reviews = [
+const reviews: {
+  name: string;
+  image: string;
+  stars: number;
+  premiumUser: boolean;
+  date: string;
+}[] = [
   {
     name: "Evondev",
     image: "",
