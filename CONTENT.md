@@ -57,3 +57,18 @@ Cú pháp:
         color: string;
     }
 ```
+
+# FUNCTION OVERLOADING
+
+- Trong JS thì không thể định nghĩa 2 hàm cùng tên như trên
+- Trong TS có thể làm được việc đó (TS gọi đó là Function Overloading)
+- function overloading: function have the same name, same amount of different amount of parameters, different type and same or different return type
+  Cú pháp
+
+```php
+    function total(a: number, b: number): number;
+    function total(a: string, b: string): string;
+    function total(a: any, b: any) {
+    return a + b;
+}
+```
