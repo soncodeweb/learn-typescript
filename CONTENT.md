@@ -21,6 +21,18 @@ _Note:_ - optional: không bắt buộc
 # Structural types
 
 - Object
+  `const object: {} = {}`
+  ```php
+    const user: { firstName: string; lastName: string; age: number; isStudent: boolean; } =
+    {
+        firstName: "Le",
+        lastName: "Quang Son",
+        age: 22,
+        isStudent: ['Cao Thang', 'GTVT'],
+    };
+  ```
+  `number[]`: mảng các số
+  `string[]`: mảng các chuỗi
 - Array
 - Tuple
 - Enum

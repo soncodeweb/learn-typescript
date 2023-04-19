@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import "./App.css";
 
@@ -31,6 +32,23 @@ const reviews = [
     date: "04/08/2022",
   },
 ];
+
+//#region object
+// const object: {} = {}
+const user: {
+  firstName: string;
+  lastName: string;
+  age: number;
+  isStudent: (string | number)[];
+  scores: number[];
+} = {
+  firstName: "Le",
+  lastName: "Quang Son",
+  age: 22,
+  isStudent: ["Cao Thang", "GTVT", 23],
+  scores: [0, 10, 20],
+};
+//#endregion
 
 function App() {
   // const [count, setCount] = useState(0);
