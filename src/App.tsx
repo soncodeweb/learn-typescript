@@ -1,24 +1,69 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+
+const reviews = [
+  {
+    name: "Evondev",
+    image: "",
+    stars: 5,
+    premiumUser: true,
+    date: "05/09/2022",
+  },
+  {
+    name: "CharkaUI",
+    image: "",
+    stars: 4,
+    premiumUser: false,
+    date: "03/08/2022",
+  },
+  {
+    name: "React Query",
+    image: "",
+    stars: 3,
+    premiumUser: false,
+    date: "04/08/2022",
+  },
+  {
+    name: "React Query",
+    image: "",
+    stars: 4,
+    premiumUser: false,
+    date: "04/08/2022",
+  },
+];
 
 function App() {
+  // const [count, setCount] = useState(0);
+
+  //#region Primitive types
+  function displayReview(
+    totalReview: number,
+    name: string,
+    premiumUser: boolean
+  ) {
+    return (
+      <>
+        Review total <strong>{totalReview}</strong> | Last reviewed by{" "}
+        <strong>{name}</strong> {premiumUser ? "⭐️" : ""}
+      </>
+    );
+  }
+  //#endregion
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="review">
+        <div className="review-info">
+          {displayReview(
+            reviews.length,
+            reviews[1].name,
+            reviews[1].premiumUser
+          )}
+        </div>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
     </div>
   );
 }
