@@ -1,11 +1,57 @@
-function total(a: number, b: number) {
+/* eslint-disable @typescript-eslint/no-unused-vars */
+function total(a: number, b: number): number {
   return a + b;
 }
+total(5, 3);
 // Type assignment
 // const variable: dataTypes = value
 const age: number = 20;
 const name: string = "Quang Son";
 const isStudent: boolean = false;
 const school = "Giao Thông Vận Tải";
+/**
+  # Tuple
+  string[] -> ['javascript', 'react', 'nodeJs']
+  Cú pháp: [number, string]
+  Đúng: [1, 'Quang Son']
+  Sai: ['Le', 'Quang Son']
+ */
+
+/**
+  # Enum: Là tập hơp các const
+  Cú pháp: 
+    enum Permission {
+      ADMIN = 'ADMIN',
+      EDITOR = 'EDITOR',
+      MODERATOR = 'MODERATOR',
+    }
+ */
+
+// Any
+/**
+  # Union
+    Cú pháp: string | number
+ */
+
+/**
+  # Literal: giá trị chỉ được 1 trong 3 số(kiểu tùy ý) đó
+  * Cú pháp: type age = 18 | 30 | "40"
+ */
+
+/**
+  # Function: 
+  * Cú pháp: 
+    function total(a: number, b: number): number {
+      return a + b;
+    }
+ */
+
+/**
+  # Void: 
+  * Cú pháp: 
+    function total(a: number, b: number): void {
+      // Khi không return về cái gì thì dùng void
+    }
+ */
 
 export { total };

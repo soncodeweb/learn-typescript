@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import "./App.css";
+import { Permission } from "./utils/enums";
+import { Age } from "./utils/types";
 
 const reviews: {
   name: string;
@@ -44,15 +46,17 @@ const reviews: {
 const user: {
   firstName: string;
   lastName: string;
-  age: number;
+  age: Age;
   isStudent: (string | number)[];
   scores: number[];
+  permission: Permission;
 } = {
   firstName: "Le",
   lastName: "Quang Son",
-  age: 22,
+  age: "40",
   isStudent: ["Cao Thang", "GTVT", 23],
   scores: [0, 10, 20],
+  permission: Permission.ADMIN,
 };
 //#endregion
 
