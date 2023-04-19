@@ -54,4 +54,36 @@ const school = "Giao Thông Vận Tải";
     }
  */
 
+/**
+  # unknown: 
+  * Cú pháp: 
+    let aNumber: unknown;
+    aNumber = 100; 
+    aNumber.toFixed(2) // 'aNumber' is of type 'unknown'
+    Phải kiểm tra kiểu mới sử dụng được
+    if (typeof aNumber === "number") aNumber.toFixed(2);
+ */
+
+/**
+  # never: 
+    + Không chứa dữ liệu
+    + Đại diện cho 1 func trả ra 1 cái lỗi nào đó
+  * Cú pháp: 
+  * Ví dụ: 
+    * func bắn ra lỗi 
+    function raiseError(error: string): never {
+      throw new Error(error);
+    }
+
+    function reject() {
+      return raiseError("error");
+    }
+    * func không dừng lại
+    let loop = function forever() {
+      while (true) {
+        console.log("Hello World");
+      }
+    };
+ */
+
 export { total };
