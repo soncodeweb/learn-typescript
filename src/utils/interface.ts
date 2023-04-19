@@ -14,6 +14,6 @@ export interface ICart {
 export interface ProductNewFeature extends Product {
   speed?: string;
 }
-// union
-// assertions: & -> merge 2 interface lại với nhau
+
+// Intersection: & -> merge 2 interface lại với nhau
 export type FinalProduct = Product & ProductNewFeature;
