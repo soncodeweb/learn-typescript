@@ -44,6 +44,15 @@ _Note:_ - optional: không bắt buộc
     Cú pháp: [number, string]
     Đúng: [1, 'Quang Son']
     Sai: ['Le', 'Quang Son']
+    // [number, number] -> [100,100]
+    type ThreeDCoordinate = [x: number, y: number, z: number];
+    function add3DCoordinate(
+      a: ThreeDCoordinate,
+      b: ThreeDCoordinate
+    ): ThreeDCoordinate {
+      return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+    }
+    add3DCoordinate([1, 100, 200], [200, 300, 400]);
   ```
 - Enum: Là tập hơp các const
   ```php
