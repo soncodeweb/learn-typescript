@@ -1,16 +1,16 @@
 # Primitive types
 
-- typeof // Kiểm tra loại kiểu dữ liệu
-- Type Assignment
-  `const variable: dataTypes = value`
-- Number Types
-  `const age:number = 12`
-- String Types
-  `const name:string = 'son'`
-  or
-  `const name = 'son'`
-- Boolean Types
-  `const name:boolean = false`
+1. typeof // Kiểm tra loại kiểu dữ liệu
+2. Type Assignment
+   `const variable: dataTypes = value`
+3. Number Types
+   `const age:number = 12`
+4. String Types
+   `const name:string = 'son'`
+   or
+   `const name = 'son'`
+5. Boolean Types
+   `const name:boolean = false`
 
 _Note:_ - optional: không bắt buộc
 
@@ -20,30 +20,185 @@ _Note:_ - optional: không bắt buộc
 
 # Structural types
 
-- Object
-  `const object: {} = {}`
-  `const object: {}[] = [{}]`: một mảng các obj
+1. Object
+   `const object: {} = {}`
+   `const object: {}[] = [{}]`: một mảng các obj
 
-  ```php
-    const user: { firstName: string; lastName: string; age: number; isStudent: boolean; } =
-    {
-        firstName: "Le",
-        lastName: "Quang Son",
-        age: 22,
-        isStudent: ['Cao Thang', 'GTVT'],
-    };
-  ```
+```php
+  const user: { firstName: string; lastName: string; age: number; isStudent: boolean; } =
+  {
+      firstName: "Le",
+      lastName: "Quang Son",
+      age: 22,
+      isStudent: ['Cao Thang', 'GTVT'],
+  };
+```
 
-  `number[]`: mảng các số
-  `string[]`: mảng các chuỗi
+`number[]`: mảng các số
+`string[]`: mảng các chuỗi
 
 - Array
 - Tuple
-- Enum
+  ```php
+    string[] -> ['javascript', 'react', 'nodeJs']
+    Cú pháp: [number, string]
+    Đúng: [1, 'Quang Son']
+    Sai: ['Le', 'Quang Son']
+  ```
+- Enum: Là tập hơp các const
+  ```php
+  Cú pháp:
+    enum Permission {
+      ADMIN = 'ADMIN',
+      EDITOR = 'EDITOR',
+      MODERATOR = 'MODERATOR',
+    }
+  ```
 - Any
 - Union
-- Literal
+  ```php
+  Cú pháp: string | number
+  ```
+- Literal: giá trị chỉ được 1 trong 3 số(kiểu tùy ý) đó
+  ```php
+  Cú pháp: type age = 18 | 30 | "40"
+  ```
+- unknown:
+  ```php
+    * Cú pháp:
+      let aNumber: unknown;
+      aNumber = 100;
+      aNumber.toFixed(2) // 'aNumber' is of type 'unknown'
+      Phải kiểm tra kiểu mới sử dụng được
+      if (typeof aNumber === "number") aNumber.toFixed(2);
+  ```
+- never:
+
+  - Không chứa dữ liệu
+  - Đại diện cho 1 func trả ra 1 cái lỗi nào đó
+
+  * Cú pháp:
+  * Ví dụ:
+
+  ```php
+    * func bắn ra lỗi
+    function raiseError(error: string): never {
+      throw new Error(error);
+    }
+
+    function reject() {
+      return raiseError("error");
+    }
+    * func không dừng lại
+    let loop = function forever() {
+      while (true) {
+        console.log("Hello World");
+      }
+    };
+  ```
+
 - Function
+
+  1.  Normal function
+
+  ```php
+  function addNumbers(a: number, b: number): number {
+    return a + b;
+  }
+  ```
+
+  2. Arrow function
+
+  ```php
+  const addStrings = (x: string, y: string): string => {
+    return `${x} ${y}`;
+  };
+  ```
+
+  3. Default parameters
+
+  ```php
+  function addNumbersWithDefaultParams(a: number = 10, b: number = 20): number {
+    return a + b;
+  }
+  addNumbersWithDefaultParams(); // 30
+  ```
+
+  4. Union types
+
+  ```php
+  function format(title: string, desc: string, amount: string | number) {
+    return `${title} ${desc} ${amount}`;
+  }
+  format("Title", "desc", 10);
+  format("Title", "desc", "10");
+  ```
+
+  5. Void function
+
+  ```php
+  function contact(email: string, phone: number): void {
+    console.log(email, phone);
+  }
+  ```
+
+  6. Promise functions
+
+  ````php
+  const fetchData = (url: string): Promise<string> =>
+  Promise.resolve(`Get data from ${url}`);
+  ```
+  ````
+
+7.  Rest parameters
+
+```php
+function information(id: number, ...names: string[]): string {
+  return `${id} ${names.join(" ")}`;
+}
+  information(1, "Quang Son", "Quang Hai");
+```
+
+8. With callback
+
+```php
+function handleFile(text: string, callback: () => void): void {
+  console.log(text);
+  callback();
+}
+```
+
+9. Function params with params
+
+```php
+function handleUpdateArray(
+  numbers: number[],
+  update: (n: number) => number
+  ): number[] {
+  return numbers.map((item) => update(item));
+  }
+  handleUpdateArray([1, 2, 3, 5], (n) => n \_ 5); // 5 10 15 20
+```
+
+10. Function as types
+
+```php
+  type UpdateArray = (n: number) => number;
+  function handleUpdateArray(numbers: number[], update: UpdateArray): number[] {
+  return numbers.map((item) => update(item));
+  }
+  handleUpdateArray([1, 2, 3, 5], (n) => n \_ 5); // 5 10 15 20
+```
+
+11. Function return function
+
+```php
+  function handleValue(val: number): (n: number) => number {
+  return (n: number) => n \* val;
+  }
+  const value = handleValue(5);
+  console.log(value(10));
+```
 
 # INTERFACE
 
@@ -98,7 +253,6 @@ Cú pháp:
     // Intersection types
     type Employee = IIdentity & IContact;
     type Customer = IBusinessPartner & IContact;
-
 
     let quangson: Employee = {
     id: 1,

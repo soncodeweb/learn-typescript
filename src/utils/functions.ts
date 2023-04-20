@@ -46,3 +46,61 @@ function parseCoordinate(arg1: any, arg2?: any): Coordinate {
 }
 
 // Type assertion `as`: Ép kiểu
+
+// - Normal function
+function addNumbers(a: number, b: number): number {
+  return a + b;
+}
+// - Arrow function
+const addStrings = (x: string, y: string): string => {
+  return `${x} ${y}`;
+};
+// Default parameters
+function addNumbersWithDefaultParams(a: number = 10, b: number = 20): number {
+  return a + b;
+}
+addNumbersWithDefaultParams(); // 30
+// Union types
+function format(title: string, desc: string, amount: string | number) {
+  return `${title} ${desc} ${amount}`;
+}
+format("Title", "desc", 10);
+format("Title", "desc", "10");
+
+// Void function
+function contact(email: string, phone: number): void {
+  console.log(email, phone);
+}
+// Promise functions
+const fetchData = (url: string): Promise<string> =>
+  Promise.resolve(`Get data from ${url}`);
+// Rest parameters
+function information(id: number, ...names: string[]): string {
+  return `${id} ${names.join(" ")}`;
+}
+information(1, "Quang Son", "Quang Hai");
+// With callback
+function handleFile(text: string, callback: () => void): void {
+  console.log(text);
+  callback();
+}
+// Function params with params
+// function handleUpdateArray(
+//   numbers: number[],
+//   update: (n: number) => number
+// ): number[] {
+//   return numbers.map((item) => update(item));
+// }
+// handleUpdateArray([1, 2, 3, 5], (n) => n * 5); // 5 10 15 20
+// Function as types
+type UpdateArray = (n: number) => number;
+function handleUpdateArray(numbers: number[], update: UpdateArray): number[] {
+  return numbers.map((item) => update(item));
+}
+handleUpdateArray([1, 2, 3, 5], (n) => n * 5); // 5 10 15 20
+// Function return function
+function handleValue(val: number): (n: number) => number {
+  return (n: number) => n * val;
+}
+const value = handleValue(5);
+console.log(value(10));
