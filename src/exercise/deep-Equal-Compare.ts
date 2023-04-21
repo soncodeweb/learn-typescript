@@ -8,4 +8,4 @@ function deepEqualCompare<T>(
 // Dont pass an array here
 deepEqualCompare(true, true);
 deepEqualCompare("quangson", "quangson");
-deepEqualCompare([1, 2], [1, 2]);
+// deepEqualCompare([1, 2], [1, 2]); // Argument of type 'number[]' is not assignable to parameter of type '"Dont pass an array here"'

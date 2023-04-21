@@ -17,7 +17,7 @@ const myStudent = {
   age: 12,
 };
 
-// type Student = typeof myStudent; // trả ra cái type của obj myStudent
+//  type Student = typeof myStudent; // trả ra cái type của obj myStudent
 // <=>
 // {
 //     id: number;

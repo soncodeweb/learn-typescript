@@ -1,4 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+
+/*---------------------------GENERICS------------------------*/
+// Kiểu dữ liệu mà có nhận tham số và trả về kiểu dữ liệu tương ứng.
+// Generics cho phép tạo 'biến loại' có thể được sử dụng để tạo lớp, hàm & loại bí danh mà không cần xác định rõ ràng loại mà chúng sử dụng.
+
+// Generics giúp viết mã có thể tái sử dụng dễ dàng hơn.
 function simpleUseState<T>(val: T): [() => T, (v: T) => void] {
   return [
     () => val,
