@@ -77,9 +77,11 @@ function App() {
             </button>
           </div>
         )}
+        keyExtractor={(item) => item.id}
       ></RenderList>
       <RenderList
         items={products}
+        keyExtractor={(item) => item.id}
         render={(item) => (
           <div className="flex items-center mb-2 gap-x-3" key={item.id}>
             <span className="w-[250px]">{item.title}</span>
@@ -138,14 +140,18 @@ const Boxed = ({ children }: { children: ReactNode }) => {
 const RenderList = <T,>({
   items,
   render,
+  keyExtractor,
 }: {
   items: T[];
   render: (item: T) => React.ReactNode;
+  keyExtractor: (item: T) => string | number;
 }) => {
   return (
-    <>
-      <div className="mb-5">{items.map((item) => render(item))}</div>
-    </>
+    <ul>
+      {items.map((item, index) => (
+        <li key={keyExtractor(item)}> {render(item)}</li>
+      ))}
+    </ul>
   );
 };
 export default App;
