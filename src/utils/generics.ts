@@ -5,6 +5,9 @@
 // Generics cho phép tạo 'biến loại' có thể được sử dụng để tạo lớp, hàm & loại bí danh mà không cần xác định rõ ràng loại mà chúng sử dụng.
 
 // Generics giúp viết mã có thể tái sử dụng dễ dàng hơn.
+// Khi nào chúng ta sử dụng generics: Khi chúng ta sử dụng 1 func hay kiểu nào đó mà sử dụng cái type đa dạng
+
+// Example 1:
 function simpleUseState<T>(val: T): [() => T, (v: T) => void] {
   return [
     () => val,
@@ -14,44 +17,26 @@ function simpleUseState<T>(val: T): [() => T, (v: T) => void] {
   ];
 }
 
-const [strGetter, strSetter] = simpleUseState("Quang Sơn");
-console.log(strGetter()); // Quang Sơn
-strSetter("Văn Toàn");
-console.log(strGetter()); // Văn Toàn
+const [strGetter, strSetter] = simpleUseState("evondev");
+const [strGetter2, strSetter2] = simpleUseState(230);
+const [strGetter3, strSetter3] = simpleUseState(true);
 
-const [strGetter2, strSetter2] = simpleUseState(2);
-const [strGetter3, strSetter3] = simpleUseState(100);
+// Example 2:
 
-interface Rank<R> {
-  item: R;
+interface rank<RankItem> {
+  item: RankItem;
   rank: number;
 }
-function ranker<R>(items: R[], rank: (v: R) => number): R[] {
-  const ranks: Rank<R>[] = items.map((item) => ({
+function ranker<RankItem>(
+  items: RankItem[],
+  rank: (v: RankItem) => number
+): RankItem[] {
+  const ranks: rank<RankItem>[] = items.map((item) => ({
     item: item,
     rank: rank(item),
   }));
-  ranks.sort((a, b) => a.rank - b.rank);
   return ranks.map((rank) => rank.item);
 }
 
-const languages: {
-  name: string;
-  dificulty: number;
-}[] = [
-  {
-    name: "ReactJs",
-    dificulty: 60,
-  },
-  {
-    name: "NodeJs",
-    dificulty: 80,
-  },
-  {
-    name: "Vue",
-    dificulty: 70,
-  },
-];
-// console.log(ranker([1, 2, 4, 5, 6], (number) => number * 5));
-
-console.log(ranker(languages, ({ dificulty }) => dificulty));
+ranker([1, 2, 3, 4, 5], (v) => v * 5);
+// [1,2,3,4,5] (v) => v

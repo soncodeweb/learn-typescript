@@ -17,15 +17,19 @@ const myStudent = {
   age: 12,
 };
 
-//  type Student = typeof myStudent; // trả ra cái type của obj myStudent
+const firstName = "Quang Sơn";
+
+type Student1 = typeof myStudent; // trả ra cái type của obj myStudent
 // <=>
 // {
 //     id: number;
 //     name: string;
 //     age: number;
 // }
+type Student2 = typeof firstName; // trả ra cái type của obj myStudent
+// type Student2 = "Quang Sơn"
 
 // keyof
-type Student = keyof typeof myStudent; // trả ra cái type của obj myStudent
+type Student3 = keyof typeof myStudent; // trả ra tập hợp các key theo kiểu union của `typeof myStudent` này
 // <=>
 // "name" | "age" | "id"
