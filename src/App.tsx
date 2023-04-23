@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ReactNode, useEffect, useReducer, useRef, useState } from "react";
 import "./App.css";
+import useTodos from "./hooks/useTodos";
 const Heading = ({ title }: { title?: string }) => {
   return <h2 className="mb-5 text-2xl font-bold">{title}</h2>;
 };
@@ -27,7 +28,12 @@ const todoReducer = (state: Todo[], action: ActionType) => {
       throw new Error("");
   }
 };
-const intialState: Todo[] = [
+
+interface Data {
+  text: string;
+}
+
+const intialState = [
   {
     id: 1,
     text: "Learn TypeScript",
@@ -45,23 +51,8 @@ const intialState: Todo[] = [
     text: "Learn MongoDB",
   },
 ];
-
-interface Data {
-  text: string;
-}
 function App() {
-  const [todos, dispatch] = useReducer(todoReducer, intialState);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const onRemoveToDo = (todoId: number) => {
-    dispatch({ type: "REMOVE", id: todoId });
-  };
-
-  const handleAddTodo = () => {
-    if (inputRef.current?.value) {
-      dispatch({ type: "ADD", text: inputRef.current.value });
-    }
-  };
-
+  const { todos, onAddTodo, onRemoveTodo, inputRef } = useTodos(intialState);
   const [data, setData] = useState<Data | null>(null);
   useEffect(() => {
     fetch("/data.json")
@@ -84,10 +75,10 @@ function App() {
       <div className="max-w-sm">
         <div className="mb-5">
           {todos.map((todo) => (
-            <div className="flex items-center mb-2 gap-x-3" key={todo.id}>
+            <div className="flex items-center mb-2 gap-x-3" key={todo.text}>
               <span className="w-[250px]">{todo.text}</span>
               <button
-                onClick={() => onRemoveToDo(todo.id)}
+                onClick={() => onRemoveTodo(todo.id)}
                 className="p-2 text-sm font-medium text-white bg-red-500 rounded-lg "
               >
                 Remove
@@ -105,7 +96,7 @@ function App() {
           />
           <button
             className="p-2 text-center text-white bg-blue-500 rounded-lg"
-            onClick={() => handleAddTodo()}
+            onClick={() => onAddTodo()}
           >
             Add todo
           </button>
