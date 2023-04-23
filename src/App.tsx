@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useReducer, useRef, useState } from "react";
+import { ReactNode, useEffect, useReducer, useRef, useState } from "react";
 import "./App.css";
 const Heading = ({ title }: { title?: string }) => {
   return <h2 className="mb-5 text-2xl font-bold">{title}</h2>;
@@ -45,22 +45,42 @@ const intialState: Todo[] = [
     text: "Learn MongoDB",
   },
 ];
+
+interface Data {
+  text: string;
+}
 function App() {
   const [todos, dispatch] = useReducer(todoReducer, intialState);
   const inputRef = useRef<HTMLInputElement>(null);
   const onRemoveToDo = (todoId: number) => {
     dispatch({ type: "REMOVE", id: todoId });
   };
-  console.log("render");
 
   const handleAddTodo = () => {
     if (inputRef.current?.value) {
       dispatch({ type: "ADD", text: inputRef.current.value });
     }
   };
+
+  const [data, setData] = useState<Data | null>(null);
+  useEffect(() => {
+    fetch("/data.json")
+      .then((res) => res.json())
+      .then((result) => setData(result));
+  }, []);
+  const items = ["html", "css", "javascript"];
+  const onClickItem = (item: string) => {
+    alert(item);
+  };
   return (
     <div className="App">
       <Heading title={"Todo App"}></Heading>
+      <List items={items} onClickItem={onClickItem}></List>
+      <Boxed>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia alias
+        architecto quidem eligendi quis dolore numquam sint aliquid molestiae,
+        illum earum fugit iure laudantium labore nemo culpa in, nobis aperiam.
+      </Boxed>
       <div className="max-w-sm">
         <div className="mb-5">
           {todos.map((todo) => (
@@ -95,4 +115,25 @@ function App() {
   );
 }
 
+const List = ({
+  items,
+  onClickItem,
+}: {
+  items: string[];
+  onClickItem?: (item: string) => void;
+}) => {
+  return (
+    <div>
+      {items.map((item) => (
+        <div key={item} onClick={() => onClickItem?.(item)}>
+          {item}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const Boxed = ({ children }: { children: ReactNode }) => {
+  return <div>{children}</div>;
+};
 export default App;
