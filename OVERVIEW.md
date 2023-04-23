@@ -27,6 +27,18 @@
 - Type casting `as` `<>`
 - Type assertions `as`
 
+# Advanced types `*`
+
+- TypeScript Generics
+- Generic Constraints
+- Generic Interfaces
+- Conditional types
+- Indexes types
+- Utility types
+- Mapped types
+
+# Note: Indexable types
+
 # React
 
 - Functional Component
@@ -38,17 +50,3 @@
 - ContextAPI
 - Zustand
 - Redux Toolkit
-
-# Advanced types `*`
-
-- TypeScript Generics
-- Generic Constraints
-- Generic Interfaces
-- Conditional types
-- Indexes types
-- Utility types
-- Mapped types
-
-```
-
-```

@@ -17,7 +17,7 @@ function simpleUseState<T>(val: T): [() => T, (v: T) => void] {
   ];
 }
 
-const [strGetter, strSetter] = simpleUseState("evondev");
+const [strGetter, strSetter] = simpleUseState<string>("evondev");
 const [strGetter2, strSetter2] = simpleUseState(230);
 const [strGetter3, strSetter3] = simpleUseState(true);
 

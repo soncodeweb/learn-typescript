@@ -1,16 +1,16 @@
-import { FinalProduct, Product, ProductNewFeature } from "./interface";
+// import { FinalProduct, Product, ProductNewFeature } from "./interface";
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-function total(a: number, b: number): number {
-  return a + b;
-}
-total(5, 3);
-// Type assignment
-// const variable: dataTypes = value
-const age: number = 20;
-const name: string = "Quang Son";
-const isStudent: boolean = false;
-const school = "Giao Thông Vận Tải";
+// function total(a: number, b: number): number {
+//   return a + b;
+// }
+// total(5, 3);
+// // Type assignment
+// // const variable: dataTypes = value
+// const age: number = 20;
+// const name: string = "Quang Son";
+// // const isStudent: boolean = false;
+// const school = "Giao Thông Vận Tải";
 /**
   # Tuple
   string[] -> ['javascript', 'react', 'nodeJs']
@@ -88,13 +88,13 @@ const school = "Giao Thông Vận Tải";
     };
  */
 
-const product: FinalProduct = {
-  name: "car",
-  brand: "bmw",
-  color: "red",
-};
+// const product: FinalProduct = {
+//   name: "car",
+//   brand: "bmw",
+//   color: "red",
+// };
 
-function addProduct(product: FinalProduct) {}
+// function addProduct(product: FinalProduct) {}
 
-addProduct(product);
-export { total };
+// addProduct(product);
+// export { total };

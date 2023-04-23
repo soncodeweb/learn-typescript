@@ -1,99 +1,96 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from "react";
+import { useReducer, useRef, useState } from "react";
 import "./App.css";
-import { Permission } from "./utils/enums";
-import { Age } from "./utils/types";
-import Cart from "./components/Cart";
-
-const reviews: {
-  name: string;
-  image: string;
-  stars: number;
-  premiumUser: boolean;
-  date: string;
-}[] = [
+const Heading = ({ title }: { title?: string }) => {
+  return <h2 className="mb-5 text-2xl font-bold">{title}</h2>;
+};
+type ActionType =
+  | { type: "ADD"; text: string }
+  | { type: "REMOVE"; id: number };
+type Todo = {
+  id: number;
+  text: string;
+};
+const todoReducer = (state: Todo[], action: ActionType) => {
+  switch (action.type) {
+    case "ADD":
+      return [
+        ...state,
+        {
+          id: state.length,
+          text: action.text,
+        },
+      ];
+    case "REMOVE":
+      return state.filter((todo: Todo) => todo.id !== action.id);
+    default:
+      throw new Error("");
+  }
+};
+const intialState: Todo[] = [
   {
-    name: "Evondev",
-    image: "",
-    stars: 5,
-    premiumUser: true,
-    date: "05/09/2022",
+    id: 1,
+    text: "Learn TypeScript",
   },
   {
-    name: "CharkaUI",
-    image: "",
-    stars: 4,
-    premiumUser: false,
-    date: "03/08/2022",
+    id: 2,
+    text: "Learn Javascript",
   },
   {
-    name: "React Query",
-    image: "",
-    stars: 3,
-    premiumUser: false,
-    date: "04/08/2022",
+    id: 3,
+    text: "Learn NodeJs",
   },
   {
-    name: "React Query",
-    image: "",
-    stars: 4,
-    premiumUser: false,
-    date: "04/08/2022",
+    id: 4,
+    text: "Learn MongoDB",
   },
 ];
-
-//#region object
-// const object: {} = {}
-const user: {
-  firstName: string;
-  lastName: string;
-  age: Age;
-  isStudent: (string | number)[];
-  scores: number[];
-  permission: Permission;
-} = {
-  firstName: "Le",
-  lastName: "Quang Son",
-  age: "40",
-  isStudent: ["Cao Thang", "GTVT", 23],
-  scores: [0, 10, 20],
-  permission: Permission.ADMIN,
-};
-//#endregion
-
 function App() {
-  // const [count, setCount] = useState(0);
+  const [todos, dispatch] = useReducer(todoReducer, intialState);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const onRemoveToDo = (todoId: number) => {
+    dispatch({ type: "REMOVE", id: todoId });
+  };
+  console.log("render");
 
-  //#region Primitive types
-  function displayReview(
-    totalReview: number,
-    name: string,
-    premiumUser: boolean
-  ) {
-    return (
-      <>
-        {/* <Cart></Cart> */}
-        Review total <strong>{totalReview}</strong> | Last reviewed by{" "}
-        <strong>{name}</strong> {premiumUser ? "⭐️" : ""}
-      </>
-    );
-  }
-  //#endregion
-
+  const handleAddTodo = () => {
+    if (inputRef.current?.value) {
+      dispatch({ type: "ADD", text: inputRef.current.value });
+    }
+  };
   return (
     <div className="App">
-      <div className="review">
-        <div className="review-info">
-          {displayReview(
-            reviews.length,
-            reviews[1].name,
-            reviews[1].premiumUser
-          )}
+      <Heading title={"Todo App"}></Heading>
+      <div className="max-w-sm">
+        <div className="mb-5">
+          {todos.map((todo) => (
+            <div className="flex items-center mb-2 gap-x-3" key={todo.id}>
+              <span className="w-[250px]">{todo.text}</span>
+              <button
+                onClick={() => onRemoveToDo(todo.id)}
+                className="p-2 text-sm font-medium text-white bg-red-500 rounded-lg "
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
+        <div className="flex items-center gap-x-5">
+          <input
+            type="text"
+            name=""
+            id=""
+            className="p-2 border rounded-lg outline-none border-slate-200 w-[250px]"
+            ref={inputRef}
+          />
+          <button
+            className="p-2 text-center text-white bg-blue-500 rounded-lg"
+            onClick={() => handleAddTodo()}
+          >
+            Add todo
+          </button>
         </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   );
 }
