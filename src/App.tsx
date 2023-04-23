@@ -5,29 +5,6 @@ import useTodos from "./hooks/useTodos";
 const Heading = ({ title }: { title?: string }) => {
   return <h2 className="mb-5 text-2xl font-bold">{title}</h2>;
 };
-type ActionType =
-  | { type: "ADD"; text: string }
-  | { type: "REMOVE"; id: number };
-type Todo = {
-  id: number;
-  text: string;
-};
-const todoReducer = (state: Todo[], action: ActionType) => {
-  switch (action.type) {
-    case "ADD":
-      return [
-        ...state,
-        {
-          id: state.length,
-          text: action.text,
-        },
-      ];
-    case "REMOVE":
-      return state.filter((todo: Todo) => todo.id !== action.id);
-    default:
-      throw new Error("");
-  }
-};
 
 interface Data {
   text: string;
@@ -63,6 +40,21 @@ function App() {
   const onClickItem = (item: string) => {
     alert(item);
   };
+
+  const products = [
+    {
+      id: 1,
+      title: "Iphone 14",
+      price: 1500,
+      store: "HoangHa",
+    },
+    {
+      id: 2,
+      title: "Iphone 11",
+      price: 1100,
+      store: "CellPhone",
+    },
+  ];
   return (
     <div className="App">
       <Heading title={"Todo App"}></Heading>
@@ -72,20 +64,35 @@ function App() {
         architecto quidem eligendi quis dolore numquam sint aliquid molestiae,
         illum earum fugit iure laudantium labore nemo culpa in, nobis aperiam.
       </Boxed>
+      <RenderList
+        items={todos}
+        render={(item) => (
+          <div className="flex items-center mb-2 gap-x-3" key={item.text}>
+            <span className="w-[250px]">{item.text}</span>
+            <button
+              onClick={() => onRemoveTodo(item.id)}
+              className="p-2 text-sm font-medium text-white bg-red-500 rounded-lg "
+            >
+              Remove
+            </button>
+          </div>
+        )}
+      ></RenderList>
+      <RenderList
+        items={products}
+        render={(item) => (
+          <div className="flex items-center mb-2 gap-x-3" key={item.id}>
+            <span className="w-[250px]">{item.title}</span>
+            <button
+              onClick={() => onRemoveTodo(item.id)}
+              className="p-2 text-sm font-medium text-white bg-red-500 rounded-lg "
+            >
+              Remove
+            </button>
+          </div>
+        )}
+      ></RenderList>
       <div className="max-w-sm">
-        <div className="mb-5">
-          {todos.map((todo) => (
-            <div className="flex items-center mb-2 gap-x-3" key={todo.text}>
-              <span className="w-[250px]">{todo.text}</span>
-              <button
-                onClick={() => onRemoveTodo(todo.id)}
-                className="p-2 text-sm font-medium text-white bg-red-500 rounded-lg "
-              >
-                Remove
-              </button>
-            </div>
-          ))}
-        </div>
         <div className="flex items-center gap-x-5">
           <input
             type="text"
@@ -126,5 +133,19 @@ const List = ({
 
 const Boxed = ({ children }: { children: ReactNode }) => {
   return <div>{children}</div>;
+};
+
+const RenderList = <T,>({
+  items,
+  render,
+}: {
+  items: T[];
+  render: (item: T) => React.ReactNode;
+}) => {
+  return (
+    <>
+      <div className="mb-5">{items.map((item) => render(item))}</div>
+    </>
+  );
 };
 export default App;
